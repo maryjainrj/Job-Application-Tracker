@@ -1,5 +1,6 @@
 package com.maryjainprojects.firstjobapp.job;
 
+import com.maryjainprojects.firstjobapp.company.Company;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,15 +15,21 @@ public class JobController {
     private JobService jobService;
 
     public JobController(JobService jobService) {
+
         this.jobService = jobService;
     }
+
     @GetMapping
     public ResponseEntity<List<Job>>  findAll(){
+
         return ResponseEntity.ok(jobService.findAll());
     }
+
+
     @PostMapping
     public ResponseEntity<String> createJob(@RequestBody Job job){
         jobService.createJob(job);
+
         return new ResponseEntity<>("Job created", HttpStatus.OK);
     }
     @GetMapping("/{id}")
